@@ -68,7 +68,7 @@ var criaJogo = function(sprite) {
     };
 
     var getLacunas = function(){
-        console.log(palavraSecreta);
+        return palavraSecreta;
     };
 
     var setPalavraSecreta = function(palavra){
@@ -91,20 +91,20 @@ var criaJogo = function(sprite) {
 };
 
 
-var jogo = criaJogo(createSprite('.sprite'));
-jogo.setPalavraSecreta("calopsita");
-jogo.processaChute('c');
-jogo.processaChute('a');
-jogo.processaChute('l');
-jogo.processaChute('o');
-jogo.processaChute('p');
-jogo.processaChute('s');
-jogo.processaChute('i');
-jogo.processaChute('e');
-jogo.processaChute('f');
-jogo.processaChute('g');
-jogo.processaChute('h');
-jogo.processaChute('j');
-jogo.processaChute('k');
-jogo.processaChute('m');
-jogo.getLacunas();
+// var jogo = criaJogo(createSprite('.sprite'));
+// jogo.setPalavraSecreta("calopsita");
+// jogo.processaChute('c');
+// jogo.processaChute('a');
+// jogo.processaChute('l');
+// jogo.processaChute('o');
+// jogo.processaChute('p');
+// jogo.processaChute('s');
+// jogo.processaChute('i');
+// jogo.processaChute('e');
+// jogo.processaChute('f');
+// jogo.processaChute('g');
+// jogo.processaChute('h');
+// jogo.processaChute('j');
+// jogo.processaChute('k');
+// jogo.processaChute('m');
+// jogo.getLacunas();
