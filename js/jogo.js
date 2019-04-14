@@ -5,6 +5,7 @@ var criaJogo = function(sprite) {
     var palavraSecretaString = '';
     contaErradas = 0;
     contaCertas = 0;
+    contador = 0;
 
     var ganhou = function(){
         palavraSecretaString = palavraSecreta.join('');
@@ -16,20 +17,13 @@ var criaJogo = function(sprite) {
     };
 
     var perdeu = function(){
-        if(contaErradas >= 8) {
-            return true;
-        } else {
-            return false;
-        }
+        return sprite.isFinished();
     };
 
     var ganhouOuPerdeu = function(){
-        if(this.palavra === palavraSecretaString || contaErradas >= 8) {
-            return true;
-        } else {
-            return false;
-        }
+        return ganhou() || perdeu();
     };
+
     var reinicia = function(){
         sprite.reset();
         contaCertas = 0;
@@ -42,27 +36,40 @@ var criaJogo = function(sprite) {
     };
 
     var processaChute = function(chute) {
+
+        if(!chute.trim()) throw Error("Chute inválido");
+        
         this.arrPalavra = this.palavra.split("");
-        contador = 0;
+
         for(var i = 0; i < this.arrPalavra.length; i++) {
-            if(chute === this.arrPalavra[i]) {
+
+            if(chute == this.arrPalavra[i]) {
                 palavraSecreta[i] += chute;
-                contador++;
                 contaCertas++;
+            } else {
+                contaErradas++;
             }
+            
+            if (i == this.arrPalavra.length - 1 && contaCertas > 0) {
+                contaErradas = 0;
+                contaCertas = 0;
+                }
         }
 
-        if(contador == 0){
-            contaErradas++;
+
+
+        if (contaErradas != 0) {
             sprite.nextFrame();
-        }
+            contaErradas = 0;
+            contaCertas = 0;
+            }
     };
 
     var getEtapa = function(){
         if(this.palavra === undefined) {
             return etapa;
         } else {
-            etapa++;
+            etapa = 2;
             return etapa;
         }
     };
@@ -72,6 +79,7 @@ var criaJogo = function(sprite) {
     };
 
     var setPalavraSecreta = function(palavra){
+        if(!palavra.trim()) throw Error("Palavra inválida");
         this.palavra = palavra;
         for(var i = 0; i < palavra.length; i++) {
             palavraSecreta.push('');
@@ -89,22 +97,3 @@ var criaJogo = function(sprite) {
         reinicia: reinicia
     };
 };
-
-
-// var jogo = criaJogo(createSprite('.sprite'));
-// jogo.setPalavraSecreta("calopsita");
-// jogo.processaChute('c');
-// jogo.processaChute('a');
-// jogo.processaChute('l');
-// jogo.processaChute('o');
-// jogo.processaChute('p');
-// jogo.processaChute('s');
-// jogo.processaChute('i');
-// jogo.processaChute('e');
-// jogo.processaChute('f');
-// jogo.processaChute('g');
-// jogo.processaChute('h');
-// jogo.processaChute('j');
-// jogo.processaChute('k');
-// jogo.processaChute('m');
-// jogo.getLacunas();
